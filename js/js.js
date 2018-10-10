@@ -8,7 +8,18 @@ let time = 0;
 let moves = 0;
 
 
-box.addEventListener('click', function(e) {
+// box.addEventListener('click', function(e) {
+//     e.preventDefault();
+//     if (e.target.classList[0] === 'icons') {
+//         let index = e.target.classList[1] - 1;
+//         let targetSquare = e.target;
+//         if (!targetSquare.innerHTML) {
+//             game.main(index, targetSquare);
+//         }
+//     }
+// })
+
+box.addEventListener('touchmove', function(e) {
     e.preventDefault();
     if (e.target.classList[0] === 'icons') {
         let index = e.target.classList[1] - 1;
@@ -19,16 +30,6 @@ box.addEventListener('click', function(e) {
     }
 })
 
-box.addEventListener('touchstart', function(e) {
-    e.preventDefault();
-    if (e.target.classList[0] === 'icons') {
-        let index = e.target.classList[1] - 1;
-        let targetSquare = e.target;
-        if (!targetSquare.innerHTML) {
-            game.main(index, targetSquare);
-        }
-    }
-})
 
 restart.addEventListener('click', function(){
     game.reset();
