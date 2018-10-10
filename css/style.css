@@ -26,6 +26,15 @@ div, main, ul {
     user-select: none;
 }
 
+#box {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 header {
     /*height: 100px;*/
     max-width: 680px;
