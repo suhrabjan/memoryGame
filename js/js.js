@@ -19,7 +19,7 @@ let moves = 0;
 //     }
 // })
 
-box.addEventListener('touchmove', function(e) {
+box.addEventListener('touchstart', function(e) {
     e.preventDefault();
     if (e.target.classList[0] === 'icons') {
         let index = e.target.classList[1] - 1;
