@@ -1,26 +1,44 @@
 const icons_arr = ['<i class="fa fa-diamond"></i>', '<i class="fa fa-diamond"></i>', '<i class="fa fa-paper-plane-o"></i>', '<i class="fa fa-paper-plane-o"></i>','<i class="fa fa-anchor"></i>', '<i class="fa fa-anchor"></i>', '<i class="fa fa-bolt"></i>', '<i class="fa fa-bolt"></i>', '<i class="fa fa-cube"></i>', '<i class="fa fa-cube"></i>', '<i class="fa fa-leaf"></i>', '<i class="fa fa-leaf"></i>', '<i class="fa fa-bicycle"></i>', '<i class="fa fa-bicycle"></i>', '<i class="fa fa-bomb"></i>', '<i class="fa fa-bomb"></i>'];
-const box = document.getElementById('box')
+const box = document.getElementById('box');
+const timer = document.querySelector('.timer');
+const mover = document.querySelector('.moves');
+const restart = document.querySelector('.restart');
 const game = new Game();
-let temp;
+let time = 0;
+let moves = 0;
+
+
+box.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (e.target.classList[0] === 'icons') {
+        let index = e.target.classList[1] - 1;
+        let targetSquare = e.target;
+        if (!targetSquare.innerHTML) {
+            game.main(index, targetSquare);
+        }
+    }
+})
+
+restart.addEventListener('click', function(){
+    game.reset();
+});
 
 
 function Square() {
 
     this.draw = function(index, targetSquare) {
-        if (!targetSquare.innerHTML) {
-            targetSquare.innerHTML = icons_arr[index];
-            targetSquare.firstChild.setAttribute('style', 'color: white; font-size: 35px; padding: 30% 0;')
-            targetSquare.setAttribute('style', 'background: #02b3e4; text-align: center');
-        }
+        targetSquare.innerHTML = icons_arr[index];
+        targetSquare.firstChild.setAttribute('style', 'color: white; font-size: 35px; padding: 30% 0;')
+        targetSquare.setAttribute('style', 'background: #02b3e4; text-align: center');
     }
 
     this.animateIfFalse = function(targetSquare) {
-        targetSquare.style.animation = 'shake 0.9s ease';
+        targetSquare.style.animation = 'shake 0.8s linear';
     }
 
     this.animateIfTrue = function(targetSquare) {
         targetSquare.style.backgroundColor = '#02ccba';
-        targetSquare.style.animation = 'confirm 0.8s ease';
+        targetSquare.style.animation = 'confirm 0.7s linear';
     }
 
     this.clear = function(targetSquare) {
@@ -28,7 +46,7 @@ function Square() {
             setTimeout(function(){
                 targetSquare.innerHTML = '';
                 targetSquare.setAttribute('style', '');
-            }, 900)
+            }, 800)
         }
     }
 }
@@ -38,10 +56,19 @@ function Square() {
 function Game(object) {
 
     this.counter = 0;
+    this.temp1;
+    this.temp2;
     this.obj_container = [];
+    this.randIdx;
+
 
     this.shuffle = function() {
-
+        for (let i = 0; i < icons_arr.length; ++i) {
+            this.randIdx = Math.floor(Math.random() * icons_arr.length);
+            temp = icons_arr[i];
+            icons_arr[i] = icons_arr[this.randIdx];
+            icons_arr[this.randIdx] = temp;
+        }
     }
 
     this.start = function() {
@@ -49,59 +76,63 @@ function Game(object) {
             const obj = new Square;
             this.obj_container.push(obj);
         }
+        this.shuffle();
+        this.setTimer();
     }
 
     this.main = function(idx, target) {
-        if (!target.innerHTML) {
             this.counter += 1;
-        }
         if (this.counter === 1) {
             this.obj_container[idx].draw(idx, target);
-            temp1 = idx;
-            temp2 = target;
+            this.temp1 = idx;
+            this.temp2 = target;
         }
         else if (this.counter === 2) {
+            this.moveCounter();
             this.counter = 0;
             this.obj_container[idx].draw(idx, target);
-            if (icons_arr[temp1] === icons_arr[idx]) {
-                this.obj_container[temp1].animateIfTrue(temp2);
+            if (icons_arr[this.temp1] === icons_arr[idx]) {
+                this.obj_container[this.temp1].animateIfTrue(this.temp2);
                 this.obj_container[idx].animateIfTrue(target);
             }
-            else if (icons_arr[temp1] !== icons_arr[idx]) {
-                this.obj_container[temp1].animateIfFalse(temp2);
+            else if (icons_arr[this.temp1] !== icons_arr[idx]) {
+                this.obj_container[this.temp1].animateIfFalse(this.temp2);
                 this.obj_container[idx].animateIfFalse(target);
-                this.obj_container[temp1].clear(temp2);
-                this.obj_container[temp1].clear(target);
+                this.obj_container[this.temp1].clear(this.temp2);
+                this.obj_container[this.temp1].clear(target);
             }
         }
     }
 
-//     this.timer = function() {
+    this.setTimer = function() {
+        setInterval(function(){
+            if (time === 1) {
+                timer.innerHTML = '1 Second';
+            } else {
+            timer.innerHTML = time.toString() + ' Seconds';
+            }
+            time += 1;
+        }, 1000);
+    }
 
-//     }
+    this.moveCounter = function() {
+        moves += 1;
+        if (moves === 1) {
+            mover.innerHTML = '1 Move';
+        } else {
+            mover.innerHTML = moves.toString() + ' Moves';
+        }
+    }
 
-//     this.getMoveCount = function() {
-
-//     }
-
-//     this.rating = function() {
-
-//     }
-
-//     this.reset() = function() {
-
-//     }
+    this.reset = function() {
+        time = 0;
+        moves = 0;
+        mover.innerHTML = '0 Moves';
+        timer.innerHTML = '0 Seconds';
+    }
 
 }
 
 game.start();
-// console.log(game.obj_container[0] === game.obj_container[0]);
 
-box.addEventListener('click', function(e) {
-    e.preventDefault();
-    if (e.target.classList[0] === 'icons') {
-        let index = e.target.classList[1] - 1;
-        let targetSquare = e.target;
-        game.main(index, targetSquare);
-    }
-})
+

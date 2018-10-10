@@ -63,6 +63,7 @@ h1 {
 
 .restart {
     float: right;
+    cursor: pointer;
 }
 
 main {
@@ -93,6 +94,7 @@ main ul {
     border-radius: 10px;
     margin: 10px;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    cursor: pointer;
 }
 
 @keyframes shake {
@@ -126,6 +128,37 @@ main ul {
 
 }
 
+@-webkit-keyframes shake {
+    0% {
+        -webkit-transform: translateX(-10px);
+    }
+    12.5% {
+        -webkit-transform: translateX(10px);
+    }
+    25% {
+        -webkit-transform: translateX(-10px);
+    }
+    37.5% {
+        -webkit-transform: translateX(10px);
+    }
+    50% {
+        -webkit-transform: translateX(-10px);
+    }
+    62.5% {
+        -webkit-transform: translateX(10px);
+    }
+    75% {
+        -webkit-transform: translateX(-10px);
+    }
+    87.5% {
+        -webkit-transform: translateX(10px);
+    }
+    100% {
+        -webkit-transform: initial;
+    }
+
+}
+
 @keyframes confirm {
     0% {
         transform: rotate(-10deg) scale(0.9, 0.9);
@@ -137,7 +170,6 @@ main ul {
     30% {
         transform: rotate(-10deg) scale(0.9, 0.9);
     }
-
     40% {
         transform: rotate(5deg) scale(1.15, 1.15);
     }
@@ -158,6 +190,41 @@ main ul {
     }
     100% {
         transform: initial;
+    }
+
+}
+
+@-webkit-keyframes confirm {
+    0% {
+        -webkit-transform: rotate(-10deg) scale(0.9, 0.9);
+    }
+    20% {
+        -webkit-transform: rotate(-10deg) scale(0.9, 0.9);
+    }
+
+    30% {
+        -webkit-transform: rotate(-10deg) scale(0.9, 0.9);
+    }
+    40% {
+        -webkit-transform: rotate(5deg) scale(1.15, 1.15);
+    }
+    50% {
+        -webkit-transform: rotate(-5deg) scale(1.15, 1.15);
+    }
+    60% {
+        -webkit-transform: rotate(5deg) scale(1.15, 1.15);
+    }
+    70% {
+        -webkit-transform: rotate(-5deg) scale(1.15, 1.15);
+    }
+    80% {
+        -webkit-transform: rotate(5deg) scale(1.15, 1.15);
+    }
+    90% {
+        -webkit-transform: rotate(-5deg) scale(1.15, 1.15);
+    }
+    100% {
+        -webkit-transform: initial;
     }
 
 }
