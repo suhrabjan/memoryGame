@@ -49,16 +49,16 @@ box.addEventListener('touchmove', function(e) {
     }
 })
 
-// box.addEventListener('click', function(e) {
-//     e.preventDefault();
-//     if (e.target.classList[0] === 'icons') {
-//         let index = e.target.classList[1] - 1;
-//         let targetSquare = e.target;
-//         if (!targetSquare.innerHTML) {
-//             game.main(index, targetSquare);
-//         }
-//     }
-// })
+box.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (e.target.classList[0] === 'icons') {
+        let index = e.target.classList[1] - 1;
+        let targetSquare = e.target;
+        if (!targetSquare.innerHTML) {
+            game.main(index, targetSquare);
+        }
+    }
+})
 
 
 restart.addEventListener('click', function(){
