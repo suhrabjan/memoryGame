@@ -7,13 +7,13 @@
 html, body {
     width: 100vw;
     height: 100vh;
-    position: fixed;
 }
 
 body {
     background-image: url('../img/geometry2.png');
     font-family: sans-serif;
     font-size: 20px;
+    position: fixed;
 }
 
 div, main, ul {
